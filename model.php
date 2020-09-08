@@ -36,10 +36,10 @@
     $query = "SELECT `mail` FROM `user`";
     $request = $dB->prepare($query);
     $request->execute();
-    // if ($datas = $request->fetch()) {
-    //    if($datas['mail'] == $email){
-    //  return 'Votre email existe déjà, veuillez vous connecter.';
-    // }else {
+    if ($datas = $request->fetch()) {
+       if($datas['mail'] == $email){
+     return 'Votre email existe déjà, veuillez vous connecter.';
+    }else {
     $query = "INSERT INTO `user`(`mail`,`password`) VALUES (:mail, :password)";
     $password = password_hash($password, PASSWORD_DEFAULT);
     $arrayValue = [
@@ -53,8 +53,8 @@
         return 'pas ok';
       }
       $request->closeCursor();
-    // }
+     }
   }
-// }
+ }
 
  ?>
